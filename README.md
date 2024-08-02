@@ -10,7 +10,7 @@
 *Este não é um sistema de garagem, é apenas para gerenciar veículos. Você pode usar este código simplesmente para o sistema de chaves.*
 
 ## Features
-- Totalmente compatível com ESX e standalone (requer banco de dados)
+- Totalmente compatível com QBX  (requer banco de dados)
 - Veículos são persistentes.
 - Capacidade de adicionar metadados aos veículos.
 - Registra o total de quilômetros percorridos pelos veículos.
