@@ -27,8 +27,8 @@ lib.addCommand(Config.Commands.givecar, {
         CreateData.setOwner = true
         CreateData.parking = vehicleData.parking
 
-        CreateData.vehicleName = vehicleData.modelName -- INSERI NOME 
-        CreateData.hash = vehicleData.vehiclehash -- HASH
+        CreateData.vehicleName = vehicleData.modelName 
+        CreateData.hash = vehicleData.vehiclehash
  
         if vehicleData.job == '' then
             CreateData.job = nil
