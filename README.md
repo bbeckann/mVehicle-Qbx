@@ -6,22 +6,22 @@
 
 
 
-# mVehicles 
-*This  is not a garage system, it is only to manage vehicles, you can use this code simply for the key system.*
+# mVehicles  - QBX
+*Este não é um sistema de garagem, é apenas para gerenciar veículos. Você pode usar este código simplesmente para o sistema de chaves.*
 
 ## Features
-- Fully compatible with ESX , standalone (requires database) 
-- Vehicle are persistent.
-- Ability to add metadata to vehicles.
-- Records total kilometers driven by vehicles.
-- Key system via item or database.
-- Engine ignition by Key item/db
-- Menu for sharing keys.
-- FakePlate *only works with vehicles spawned by the Vehicles.CreateVehicle() and ox_inventory item*
-- LockPick, Hotwire + Adapt your skillscheck and dispatch via Config.LockPickItem and  Config.HotWireItem
+- Totalmente compatível com ESX e standalone (requer banco de dados)
+- Veículos são persistentes.
+- Capacidade de adicionar metadados aos veículos.
+- Registra o total de quilômetros percorridos pelos veículos.
+- Sistema de chaves via item ou banco de dados.
+- Ignição do motor por item de chave/banco de dados
+- Menu para compartilhamento de chaves.
+- Placa Falsa funciona apenas com veículos gerados pelo Vehicles.CreateVehicle() e item ox_inventory
+- LockPick, Hotwire + Adapte seu skillscheck e dispatch via Config.LockPickItem e Config.HotWireItem
  
 
-- ## **Commands**
+- ## **Comandos**
  - `/givecar [source]`
  - - Set a player [source] a vehicle temporarily/indefinitely
  - `/setcarowner [source]`
@@ -40,7 +40,7 @@
 ![ManageVehicleKeys](https://i.imgur.com/82KfzBc.png)
 </details>
 
-## Other Features
+## Outras Funcionalidades
 - Target for managing the trailer tr2.
 
 ## Dependencies
@@ -71,68 +71,52 @@ shared_scripts { '@mVehicle/import.lua' }
 <summary>SQL </summary>
 
 # DataBase 
-## ESX 
+## QBOX 
 - Original owned_vehicles 
 - - to use it 'standalone' use this same database
 ```sql
-CREATE TABLE `owned_vehicles` (
-  `owner` varchar(60) DEFAULT NULL,
-  `plate` varchar(12) NOT NULL,
-  `vehicle` longtext DEFAULT NULL,
-  `type` varchar(20) NOT NULL DEFAULT 'car',
-  `job` varchar(20) DEFAULT NULL,
-  `stored` tinyint(4) NOT NULL DEFAULT 0,
-  `parking` VARCHAR(60) DEFAULT NULL,
-  `pound` VARCHAR(60) DEFAULT NULL
-) ENGINE=InnoDB;
-```
+CREATE TABLE `player_vehicles` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`license` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`citizenid` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`vehicle` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`hash` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`mods` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
+	`plate` VARCHAR(15) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`fakeplate` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`garage` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`fuel` INT(11) NULL DEFAULT '100',
+	`engine` FLOAT NULL DEFAULT '1000',
+	`body` FLOAT NULL DEFAULT '1000',
+	`state` INT(11) NULL DEFAULT '1',
+	`depotprice` INT(11) NOT NULL DEFAULT '0',
+	`drivingdistance` INT(50) NULL DEFAULT NULL,
+	`status` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`glovebox` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`trunk` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`mileage` INT(11) NULL DEFAULT '0',
+	`coords` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`lastparking` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`type` VARCHAR(20) NOT NULL DEFAULT 'automobile' COLLATE 'utf8mb4_unicode_ci',
+	`job` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`pound` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`stored` TINYINT(4) NOT NULL DEFAULT '0',
+	`keys` LONGTEXT NULL DEFAULT '[]' COLLATE 'utf8mb4_unicode_ci',
+	`metadata` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`parking` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `plate` (`plate`) USING BTREE,
+	INDEX `citizenid` (`citizenid`) USING BTREE,
+	INDEX `license` (`license`) USING BTREE,
+	CONSTRAINT `player_vehicles_ibfk_1` FOREIGN KEY (`citizenid`) REFERENCES `players` (`citizenid`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `player_vehicles_ibfk_2` FOREIGN KEY (`license`) REFERENCES `players` (`license`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+COLLATE='utf8mb4_unicode_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=139
+;
 
-- To inssert new
-```sql
-ALTER TABLE `owned_vehicles`
-ADD COLUMN `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST,
-ADD COLUMN `mileage` int(11) DEFAULT 0,
-ADD COLUMN `coords` longtext,
-ADD COLUMN `lastparking` varchar(100),
-ADD COLUMN `keys` longtext DEFAULT '[]',
-ADD COLUMN `metadata` longtext
 ```
-
-## OX 
-- Original table
-```sql
-CREATE TABLE
-  IF NOT EXISTS `vehicles` (
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `plate` CHAR(8) NOT NULL DEFAULT '',
-    `vin` CHAR(17) NOT NULL,
-    `owner` INT UNSIGNED NULL DEFAULT NULL,
-    `group` VARCHAR(50) NULL DEFAULT NULL,
-    `model` VARCHAR(20) NOT NULL,
-    `class` TINYINT UNSIGNED NULL DEFAULT NULL,
-    `data` LONGTEXT NOT NULL,
-    `trunk` LONGTEXT NULL DEFAULT NULL,
-    `glovebox` LONGTEXT NULL DEFAULT NULL,
-    `stored` VARCHAR(50) NULL DEFAULT NULL,
-    PRIMARY KEY (`id`) USING BTREE,
-    UNIQUE INDEX `plate` (`plate`) USING BTREE,
-    UNIQUE INDEX `vin` (`vin`) USING BTREE,
-    INDEX `FK_vehicles_characters` (`owner`) USING BTREE,
-    CONSTRAINT `FK_vehicles_characters` FOREIGN KEY (`owner`) REFERENCES `characters` (`charId`) ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT `FK_vehicles_groups` FOREIGN KEY (`group`) REFERENCES `ox_groups` (`name`) ON UPDATE CASCADE ON DELETE CASCADE
-  );
-```
-- To inssert new
-```sql
-ALTER TABLE `vehicles`
-ADD COLUMN `mileage` int(11) DEFAULT 0,
-ADD COLUMN `coords` longtext,
-ADD COLUMN `lastparking` varchar(100),
-ADD COLUMN `type` varchar(20) DEFAULT NULL,
-ADD COLUMN `keys` longtext DEFAULT '[]',
-ADD COLUMN `pound` VARCHAR(60) 
-```
-</details>
 
 ## How to use
 - READING IS NOT LAVA
