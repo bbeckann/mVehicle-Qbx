@@ -1,9 +1,9 @@
 -- Fake Plate
-exports('fakeplate', function(event, item, inventory, slot, data) -- // mudei 
+exports('fakeplate', function(event, item, inventory, slot, data) 
     if event == 'usingItem' then
         local player = GetPlayerPed(inventory.id)
         local coords = GetEntityCoords(player)
-        local identifier = citizenid(inventory.id) --mudei
+        local identifier = citizenid(inventory.id) 
         local vehicles = lib.getClosestVehicle(coords, 5.0, true)
         local vehicle = Vehicles.GetVehicle(vehicles)
         local itemSlot = exports.ox_inventory:GetSlot(inventory.id, slot)
