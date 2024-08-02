@@ -307,7 +307,6 @@ else
 end
 
 
----- MUDEI 
 if Config.FrameWork == 'qbox' then
     AddEventHandler('QBCore:Client:OnPlayerEnteredVehicle', function(entity, plate, seat, netId)
         StopBreakinCar(entity)
