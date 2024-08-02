@@ -1,0 +1,47 @@
+{
+    "Trailer Target": "",
+    "flip_trailer": "Virar Reboque",
+    "up_dow_ramp": "Levantar/Abaixar Rampa",
+    "up_dow_platform": "Levantar/Abaixar Plataforma",
+    "attach_vehicle": "Anexar Veículo",
+    "dettach_vehicle": "Desanexar Veículo",
+
+    "Vehicle doors": "",
+    "open_door": "Abrir Porta",
+    "close_door": "Fechar Porta",
+
+    "Keys": "",
+    "key_string": "Placa: %s",
+    "key_targetdoors": "Abrir / Fechar Portas",
+
+    "GiveCar Command": "",
+    "givecar_noty": "Você agora é o proprietário deste veículo %s",
+    "givecar_help": "Dê um veículo a um jogador com várias opções.",
+    "givecar_playerveh": "Defina o veículo em que o jogador está como de sua propriedade",
+    "givecar_yes": "Sim",
+    "givecar_no": "Não",
+    "givecar_menu1": "Modelo do Veículo",
+    "givecar_menu2": "Garagem",
+    "givecar_menu3": "Veículo Temporário?",
+    "givecar_menu4": "Data",
+    "givecar_menu5": "Hora",
+    "givecar_menu6": "Minutos",
+    "givecar_menu7": "Cor do Veículo 1",
+    "givecar_menu8": "Cor do Veículo 2",
+    "givecar_menu9": "Trabalho do Veículo",
+    "givecar_menu810": "Deixe em branco para nenhum TRABALHO",
+
+    "carkeyMenu": "",
+    "carkey_menu1": "Veículos Pessoais",
+    "carkey_menu2": "Você não possui veículos.",
+    "carkey_menu3": "Dar Chave",
+    "carkey_menu4": "Adicionar chaves a um jogador pelo ID.",
+    "carkey_menu5": "Ninguém tem chaves deste veículo 😪",
+    "carkey_menu6": "Excluir",
+
+    "Fake Plate": "",
+    "fakeplate1": "Placa Falsa",
+    "fakeplate2": "Este veículo não é de sua propriedade...",
+    "fakeplate3": "Placa Original",
+    "fakeplate4": "Trocando placa"
+}
