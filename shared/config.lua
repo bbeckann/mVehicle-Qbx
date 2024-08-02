@@ -2,7 +2,7 @@ Config = {}
 
 Config.Debug = false
 
-Config.Framework = 'qbox'    -- esx, standalone, qbox 50%
+Config.Framework = 'qbox'    --  qbox 100%  -- esx, standalone > talvez não funcione removido algumas função , se precisa do esx e standalone > https://github.com/Mono-94/mVehicle
 
 Config.Inventory = 'ox'     -- ox_inventory = 'ox' | qs-inventory = 'qs'  -- To give carkey item
 
