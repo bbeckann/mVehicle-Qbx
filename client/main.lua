@@ -357,7 +357,7 @@ lib.callback.register('mVehicle:GivecarData', function()
     local r1, g1, b1 = lib.math.hextorgb(input[7])
     local r2, g2, b2 = lib.math.hextorgb(input[8])
 
-    local vehiclehash = GetHashKey(input[1])  -- MUDEI DE LUGAR
+    local vehiclehash = GetHashKey(input[1])  
     local modelName = GetVehicleModelNameFromHash(vehiclehash)
 
     input[9] = GetVehicleClassFromName(input[1])
@@ -372,11 +372,10 @@ lib.callback.register('mVehicle:GivecarData', function()
         color1 = { r1, g1, b1 },
         color2 = { r2, g2, b2 },
         vehicleClass = GetVehicleClassFromName(input[1]),
-        vehiclehash = GetHashKey(input[1]),  --- ADICIONEI PARA GetHashKey PARA  GIVECAR 
-        modelName = modelName  -- Adiciona o nome do modelo ao objeto GiveCar
+        vehiclehash = GetHashKey(input[1]),  
+        modelName = modelName 
     }
 
-    -- LUGAR ANTIGO
     local isModelValid = IsModelValid(vehiclehash)
 
     if not isModelValid then return false, lib.print.error('Vehicle model invalid') end
@@ -420,8 +419,7 @@ function Vehicles.VehickeKeysMenu(plate, cb)
     end
     for i = 1, #data do
         local row = data[i]
-        local props = json.decode(row.mods)  ---mudei para mods 
-        --print(row,'string')
+        local props = json.decode(row.mods)  
         row.vehlabel = VehicleLabel(props.model)
         local metadata = json.decode(row.metadata)
 
