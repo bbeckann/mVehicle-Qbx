@@ -72,8 +72,7 @@ shared_scripts { '@mVehicle/import.lua' }
 
 # DataBase 
 ## QBOX 
-- Original owned_vehicles 
-- - to use it 'standalone' use this same database
+- Original player_vehicles
 ```sql
 CREATE TABLE `player_vehicles` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
