@@ -1,3 +1,18 @@
+#BR
+Compatibilidade com Qbox
+
+O sistema mVehicles foi atualizado para garantir total compatibilidade com o framework Qbox. A integração foi feita de forma a adaptar o código existente, proporcionando um funcionamento suave e eficiente dentro do ambiente Qbox. No entanto, como em qualquer processo de adaptação, pode haver alguns bugs ou peculiaridades específicas. Todos os créditos pelo código original e pelas funcionalidades implementadas são reservados ao criador do código, Mono.
+
+Se você encontrar algum problema ou comportamento inesperado, não hesite em relatar para que possamos continuar melhorando e ajustando a compatibilidade com Qbox. Agradecemos pela sua compreensão e contribuição!
+
+#EN
+
+Compatibility with Qbox
+The mVehicles system has been updated to ensure full compatibility with the Qbox framework. The integration was done to adapt the existing code, providing smooth and efficient operation within the Qbox environment. However, as with any adaptation process, there may be some bugs or specific quirks. All credits for the original code and implemented features are reserved for the creator of the code, Mono.
+
+If you encounter any issues or unexpected behavior, please report them so we can continue improving and adjusting compatibility with Qbox. Thank you for your understanding and contribution!
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 [![docs](https://img.shields.io/badge/Documents-Read-232323?logo=readthedocs&logoColor=white)](https://mono-scripts.gitbook.io/mono-docs/mono-documents/mvehicle)
 [![discord](https://img.shields.io/badge/Join-Discord-blue?logo=discord&logoColor=white)](https://discord.gg/Vk7eY8xYV2)
