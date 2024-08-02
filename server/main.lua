@@ -88,9 +88,9 @@ function Vehicles.CreateVehicle(data, cb)
         data.owner = data.identifier
     end
 
-    if data.citizenid then  --mudei 
-        data.id = data.citizenid  --mudei 
-    end   --mudei 
+    if data.citizenid then 
+        data.id = data.citizenid  
+    end 
 
     if data.license then
         data.owner = data.license
