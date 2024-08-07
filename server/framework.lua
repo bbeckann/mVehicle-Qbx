@@ -82,10 +82,15 @@ function GetCoords(src, veh)
     return { x = coords.x, y = coords.y, z = coords.z, w = heading }
 end
 
--- StandAlone uses the same table as Core
+
+
+-- Atualização do campo 'stored' para 'state' no banco de dados
+-- A troca de 'stored' para 'state' foi realizada para garantir compatibilidade total com o padrão do QBox SQL.
+-- O campo 'state' é um padrão no QBox, enquanto 'stored' era usado anteriormente no exemplo.
+-- Essa mudança ajuda a limpar e organizar melhor os dados no banco de dados, removendo informações desnecessárias.
 
 local query = {
-    -- type, job, coords, metadata, lastparking, pound, stored, mileage
+    -- type, job, coords, metadata, lastparking, pound, stored (removido), mileage
     ['qbox'] = {
         getVehicleById = 'SELECT * FROM `player_vehicles` WHERE `id` = ? LIMIT 1',
         getVehicleByPlate = 'SELECT * FROM `player_vehicles` WHERE `plate` = ? LIMIT 1',
@@ -97,14 +102,14 @@ local query = {
         saveMetadata = 'UPDATE player_vehicles SET metadata = ? WHERE plate = ?',
         saveProps = 'UPDATE player_vehicles SET mods = ? WHERE plate = ?',
         storeGarage =
-        'UPDATE `player_vehicles` SET `parking` = ?, `stored` = 1,  `coords` = NULL, `mods` = ?, metadata = ?  WHERE `plate` = ?',
+        'UPDATE `player_vehicles` SET `parking` = ?, `state` = 1,  `coords` = NULL, `mods` = ?, metadata = ?  WHERE `plate` = ?',
         storeGarageNoProps =
-        'UPDATE `player_vehicles` SET `parking` = ?, `stored` = 1,  `coords` = NULL, metadata = ?  WHERE `plate` = ?',
-        retryGarage = 'UPDATE `player_vehicles` SET `lastparking` = ?, `coords` = ?, `stored` = 0 WHERE `plate` = ?',
+        'UPDATE `player_vehicles` SET `parking` = ?, `state` = 1,  `coords` = NULL, metadata = ?  WHERE `plate` = ?',
+        retryGarage = 'UPDATE `player_vehicles` SET `lastparking` = ?, `coords` = ?, `state` = 0 WHERE `plate` = ?',
         setImpound =
-        'UPDATE `player_vehicles` SET `parking` = ?, `stored` = 0, `pound` = 1, `coords` = NULL, metadata = ? WHERE `plate` = ?',
+        'UPDATE `player_vehicles` SET `parking` = ?, `state` = 0, `pound` = 1, `coords` = NULL, metadata = ? WHERE `plate` = ?',
         retryImpound =
-        'UPDATE `player_vehicles` SET `lastparking` = ?, `coords` = ?, `stored` = 0, `parking` = ?, pound = NULL WHERE `plate` = ?',
+        'UPDATE `player_vehicles` SET `lastparking` = ?, `coords` = ?, `state` = 0, `parking` = ?, pound = NULL WHERE `plate` = ?',
         getMileage = 'SELECT `mileage` FROM player_vehicles WHERE plate = ? LIMIT 1',
         saveLeftVehicle = 'UPDATE player_vehicles SET mileage = ?, coords = ?, mods = ? WHERE plate = ?',
         updateTrailer = 'UPDATE player_vehicles SET coords = ?, mods = ? WHERE plate = ?',
@@ -118,6 +123,5 @@ local query = {
         getKeys = 'SELECT * FROM `player_vehicles` WHERE `citizenid` = ?',
     },
 }
-
 
 Querys = query[Config.Framework]
