@@ -11,10 +11,10 @@ CREATE TABLE `player_vehicles` (
 	`fuel` INT(11) NULL DEFAULT '100',
 	`engine` FLOAT NULL DEFAULT '1000',
 	`body` FLOAT NULL DEFAULT '1000',
-	`state` INT(11) NULL DEFAULT '1',
+        `state` INT(11) NULL DEFAULT '1', -- Estado do veículo: 1 = Na garagem, 0 = Fora da garagem
 	`depotprice` INT(11) NOT NULL DEFAULT '0',
 	`drivingdistance` INT(50) NULL DEFAULT NULL,
-	`status` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+        `status` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci', -- Informações detalhadas sobre o estado do veículo
 	`glovebox` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
 	`trunk` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
 	`mileage` INT(11) NULL DEFAULT '0',
@@ -23,7 +23,7 @@ CREATE TABLE `player_vehicles` (
 	`type` VARCHAR(20) NOT NULL DEFAULT 'automobile' COLLATE 'utf8mb4_unicode_ci',
 	`job` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
 	`pound` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`stored` TINYINT(4) NOT NULL DEFAULT '0',
+	---`stored` TINYINT(4) NOT NULL DEFAULT '0', ///removido
 	`keys` LONGTEXT NULL DEFAULT '[]' COLLATE 'utf8mb4_unicode_ci',
 	`metadata` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
 	`parking` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
