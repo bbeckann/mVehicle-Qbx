@@ -307,6 +307,7 @@ else
 end
 
 
+---- MUDEI 
 if Config.FrameWork == 'qbox' then
     AddEventHandler('QBCore:Client:OnPlayerEnteredVehicle', function(entity, plate, seat, netId)
         StopBreakinCar(entity)
@@ -357,7 +358,7 @@ lib.callback.register('mVehicle:GivecarData', function()
     local r1, g1, b1 = lib.math.hextorgb(input[7])
     local r2, g2, b2 = lib.math.hextorgb(input[8])
 
-    local vehiclehash = GetHashKey(input[1])  
+    local vehiclehash = GetHashKey(input[1])  -- MUDEI DE LUGAR
     local modelName = GetVehicleModelNameFromHash(vehiclehash)
 
     input[9] = GetVehicleClassFromName(input[1])
@@ -372,10 +373,11 @@ lib.callback.register('mVehicle:GivecarData', function()
         color1 = { r1, g1, b1 },
         color2 = { r2, g2, b2 },
         vehicleClass = GetVehicleClassFromName(input[1]),
-        vehiclehash = GetHashKey(input[1]),  
-        modelName = modelName 
+        vehiclehash = GetHashKey(input[1]),  --- ADICIONEI PARA GetHashKey PARA  GIVECAR 
+        modelName = modelName  -- Adiciona o nome do modelo ao objeto GiveCar
     }
 
+    -- LUGAR ANTIGO
     local isModelValid = IsModelValid(vehiclehash)
 
     if not isModelValid then return false, lib.print.error('Vehicle model invalid') end
@@ -419,7 +421,8 @@ function Vehicles.VehickeKeysMenu(plate, cb)
     end
     for i = 1, #data do
         local row = data[i]
-        local props = json.decode(row.mods)  
+        local props = json.decode(row.mods)  ---mudei para mods 
+        --print(row,'string')
         row.vehlabel = VehicleLabel(props.model)
         local metadata = json.decode(row.metadata)
 
@@ -485,7 +488,7 @@ function Vehicles.VehickeKeysMenu(plate, cb)
                 title = ('%s | %s'):format(row.plate, row.vehlabel),
                 description = ('%s | %s \n Parking: %s'):format(row.plate, row.vehlabel, row.parking),
                 icon = 'car',
-                iconColor = row.stored == 1 and '#5bb060' or '#b0645b',
+                iconColor = row.state == 1 and '#5bb060' or '#b0645b',
                 arrow = true,
                 onSelect = function()
                     VehicleSelected = {}
